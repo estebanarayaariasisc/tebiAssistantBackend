@@ -26,7 +26,9 @@ def start_up_training_nodel():
     intents = collection.find()
 
     # Preprocesamiento de datos
-    words, classes, documents = []
+    words = [] 
+    classes = []
+    documents = []
     ignore_letters = ['!', '?', ',', '.', '¡', '¿', '*', '-', '_', ' ']
 
     for intent in intents:
