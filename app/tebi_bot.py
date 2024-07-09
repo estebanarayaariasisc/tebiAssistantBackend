@@ -30,7 +30,7 @@ def chatbot_response(text):
 
 # Función para predecir la categoría de respuesta
 def predict_class(sentence, model):
-    p = createBag(sentence, words, show_details=False)  
+    p = createBag(sentence, words)  
     res = model.predict(numpy.array([p]))[0] 
     ERROR_THRESHOLD = 0.65  
     results = [[i, r] for i, r in enumerate(res) if r > ERROR_THRESHOLD] 
@@ -42,15 +42,14 @@ def predict_class(sentence, model):
     return return_list  
 
 # Función para crear una bolsa de palabras a partir de la frase de entrada
-def createBag(sentence, words, show_details=True):
+def createBag(sentence, words):
     sentence_words = clean_up_sentence(sentence)  
     bag = [0]*len(words)  
     for s in sentence_words:
         s = unidecode(s.lower())
         if s in words:
             bag[words.index(s)] = 1 
-            if show_details:
-                print(f"found in bag: {s}")
+
     return numpy.array(bag) 
 
 # Función para limpiar la frase de entrada y convertirla en una bolsa de palabras
